@@ -99,8 +99,10 @@ public class UserInterfacePhone {
         System.out.print("New Price: ");
         double price = scanner.nextDouble();
         scanner.nextLine();
+        System.out.print("New Release Date (YYYY-MM-DD): ");
+        String releaseDate = scanner.nextLine();
 
-        phoneDao.updatePhone(id, brand, model, price);
+        phoneDao.updatePhone(id, brand, model, price, releaseDate);
         System.out.println("Phone updated");
     }
 

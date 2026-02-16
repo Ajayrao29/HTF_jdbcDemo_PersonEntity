@@ -17,15 +17,6 @@ public class Phone {
         this.model = model;
         this.price = price;
     }
-
-    public Phone(int id, String brand, String model, double price, LocalDate releaseDate) {
-        this.id = id;
-        this.brand = brand;
-        this.model = model;
-        this.price = price;
-        this.releaseDate = releaseDate;
-    }
-
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

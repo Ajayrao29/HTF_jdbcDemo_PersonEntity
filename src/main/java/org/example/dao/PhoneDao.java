@@ -8,7 +8,7 @@ public interface PhoneDao {
     Phone findById(int id);
     List<Phone> findByBrandContaining(String text);
     void addPhone(String brand, String model, double price, String releaseDate);
-    void updatePhone(int id, String brand, String model, double price);
+    void updatePhone(int id, String brand, String model, double price, String releaseDate);
     void deleteById(int id);
     List<Phone> findAllOrderByPrice();
     List<Phone> findAllOrderByPriceDesc();

@@ -2,7 +2,6 @@ package org.example.dao;
 
 import org.example.connection.DatabaseConnection;
 import org.example.entity.Phone;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,32 +50,27 @@ public class PhoneDaoImpl implements PhoneDao {
         try (Connection con = DatabaseConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(
                      "INSERT INTO phone(brand, model, price, release_date) VALUES(?,?,?,?)")) {
-
             ps.setString(1, brand);
             ps.setString(2, model);
             ps.setDouble(3, price);
             ps.setDate(4, Date.valueOf(releaseDate));
-
             ps.executeUpdate();
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public void updatePhone(int id, String brand, String model, double price) {
+    public void updatePhone(int id, String brand, String model, double price, String releaseDate) {
         try (Connection con = DatabaseConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(
-                     "UPDATE phone SET brand=?, model=?, price=? WHERE id=?")) {
-
+                     "UPDATE phone SET brand=?, model=?, price=?, release_date=? WHERE id=?")) {
             ps.setString(1, brand);
             ps.setString(2, model);
             ps.setDouble(3, price);
-            ps.setInt(4, id);
-
+            ps.setDate(4, Date.valueOf(releaseDate));
+            ps.setInt(5, id);
             ps.executeUpdate();
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -88,13 +82,11 @@ public class PhoneDaoImpl implements PhoneDao {
              PreparedStatement ps = con.prepareStatement("DELETE FROM phone WHERE id=?")) {
             ps.setInt(1, id);
             ps.executeUpdate();
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    // ---------- helpers (same style as your PersonDaoImpl) ----------
 
     private List<Phone> executeQuery(String sql) {
         try (Connection con = DatabaseConnection.getConnection();
